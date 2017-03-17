@@ -1,0 +1,93 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.setup.compileSdk
+    buildToolsVersion rootProject.setup.buildTools
+
+    defaultConfig {
+        minSdkVersion rootProject.setup.minSdk
+        targetSdkVersion rootProject.setup.targetSdk
+        versionCode 1
+        versionName "1.0"
+
+        applicationId "com.yomii.librarydemos"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+
+    signingConfigs {
+        debug {
+            storeFile file("C:/Users/Administrator/.android/debug.keystore")
+        }
+        relealse {
+            File propFile = file('signing.properties');
+            if (propFile.exists()) {
+                def Properties props = new Properties()
+                props.load(new FileInputStream(propFile))
+                if (props.containsKey('STORE_FILE') && props.containsKey('STORE_PASSWORD') &&
+                        props.containsKey('KEY_ALIAS') && props.containsKey('KEY_PASSWORD')) {
+                    storeFile = file(props['STORE_FILE'])
+                    storePassword = props['STORE_PASSWORD']
+                    keyAlias = props['KEY_ALIAS']
+                    keyPassword = props['KEY_PASSWORD']
+                } else {
+                    android.buildTypes.release.signingConfig = null
+                }
+            } else {
+                android.buildTypes.release.signingConfig = null
+            }
+        }
+    }
+
+
+    buildTypes {
+        debug {
+            // 显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            signingConfig signingConfigs.debug
+            applicationIdSuffix '.test'
+            versionNameSuffix ".test"
+        }
+        release {
+            // 不显示Log
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            minifyEnabled true
+            shrinkResources true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            //签名
+            signingConfig signingConfigs.relealse
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    //test
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    testCompile 'junit:junit:4.12'
+    //support
+    compile "com.android.support:appcompat-v7:$rootProject.versions.libSupport"
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    //网络
+    compile "com.squareup.retrofit2:retrofit:$rootProject.versions.libRetrofit"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.versions.libRetrofit"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$rootProject.versions.libRetrofit"
+    compile "com.squareup.okhttp3:okhttp:$rootProject.versions.libOkhttp"
+    compile "com.squareup.okhttp3:logging-interceptor:$rootProject.versions.libOkhttp"
+    //rx
+    compile "io.reactivex.rxjava2:rxjava:$rootProject.versions.libRxJava"
+    compile "io.reactivex.rxjava2:rxandroid:$rootProject.versions.libRxJava"
+    //依赖注入
+    compile "com.jakewharton:butterknife:$rootProject.versions.libButterKnife"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.versions.libButterKnife"
+
+    //ui
+    //图片裁剪库 https://github.com/crazycodeboy/TakePhoto
+    compile 'com.jph.takephoto:takephoto_library:4.0.3'
+}
