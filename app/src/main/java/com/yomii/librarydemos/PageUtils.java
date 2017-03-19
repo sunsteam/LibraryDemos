@@ -11,6 +11,6 @@ import android.content.Intent;
 public class PageUtils {
 
     public static void imageFuncActivity(Context context){
-        new Intent(context, ImageFuncActivity.class);
+        context.startActivity(new Intent(context, ImageFuncActivity.class));
     }
 }

@@ -8,4 +8,17 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- 全屏幕拉伸透明背景 -->
+    <style name="PickImageDialog" parent="@style/Theme.AppCompat.Dialog">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 背景是否变暗显示 -->
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+    <style name="dialog_bottom">
+        <item name="android:windowEnterAnimation">@anim/dialog_bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/dialog_bottom_out</item>
+    </style>
+
 </resources>

@@ -18,6 +18,6 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.button_image_selector)
     void toImageSelector(){
-
+        PageUtils.imageFuncActivity(this);
     }
 }
