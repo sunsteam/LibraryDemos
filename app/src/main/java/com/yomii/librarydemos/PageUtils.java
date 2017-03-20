@@ -13,4 +13,8 @@ public class PageUtils {
     public static void imageFuncActivity(Context context){
         context.startActivity(new Intent(context, ImageFuncActivity.class));
     }
+
+    public static void RxRetrofitActivity(Context context){
+        context.startActivity(new Intent(context, ImageFuncActivity.class));
+    }
 }
