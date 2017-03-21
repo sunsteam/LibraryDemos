@@ -1,20 +1,21 @@
 package com.yomii.librarydemos;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatDialog;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.jph.takephoto.app.TakePhoto;
 import com.jph.takephoto.app.TakePhotoImpl;
+import com.jph.takephoto.compress.CompressConfig;
+import com.jph.takephoto.model.CropOptions;
 import com.jph.takephoto.model.InvokeParam;
 import com.jph.takephoto.model.TContextWrap;
+import com.jph.takephoto.model.TImage;
 import com.jph.takephoto.model.TResult;
 import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
@@ -35,7 +36,7 @@ public class ImageFuncActivity extends BaseActivity implements TakePhoto.TakeRes
 
     @BindView(R.id.image_iv)
     ImageView imageIv;
-    private AppCompatDialog dialog;
+    private PickPhotoDialog dialog;
 
     @Override
     protected void onInitView() {
@@ -45,32 +46,27 @@ public class ImageFuncActivity extends BaseActivity implements TakePhoto.TakeRes
     }
 
     private void initDialog() {
-        dialog = new AppCompatDialog(getWindow().getDecorView().getContext(), R.style.PickImageDialog);
-        dialog.setCanceledOnTouchOutside(true);
-        dialog.setContentView(R.layout.image_func_dialog);
-        dialog.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+        final CropOptions cropOptions = new CropOptions.Builder()
+                .setAspectX(1).setAspectY(1).setWithOwnCrop(true).create();
+        dialog = new PickPhotoDialog(getWindow().getDecorView().getContext());
+        dialog.setOnAlbumClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 dialog.cancel();
+                File temp = new File(getExternalCacheDir(), "temp.jpg");
+                getTakePhoto().onPickFromGalleryWithCrop(Uri.fromFile(temp), cropOptions);
             }
         });
-        dialog.findViewById(R.id.btn_source_album).setOnClickListener(new View.OnClickListener() {
+        dialog.setOnCameraClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 dialog.cancel();
-                getTakePhoto().onPickFromGallery();
+                File temp = new File(getExternalCacheDir(), "temp.jpg");
+                getTakePhoto().onPickFromCaptureWithCrop(Uri.fromFile(temp), cropOptions);
             }
         });
-        Window window = dialog.getWindow();
-        if (window != null) {
-            window.setGravity(Gravity.BOTTOM);
-            window.setWindowAnimations(R.style.dialog_bottom);
-            WindowManager.LayoutParams windowparams = window.getAttributes();
-            windowparams.width = WindowManager.LayoutParams.MATCH_PARENT;
-            window.setAttributes(windowparams);
-        }
     }
 
     @Override
@@ -92,6 +88,7 @@ public class ImageFuncActivity extends BaseActivity implements TakePhoto.TakeRes
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getTakePhoto().onCreate(savedInstanceState);
+        getTakePhoto().onEnableCompress(CompressConfig.ofDefaultConfig(), true);
         super.onCreate(savedInstanceState);
     }
 
@@ -128,10 +125,14 @@ public class ImageFuncActivity extends BaseActivity implements TakePhoto.TakeRes
 
     @Override
     public void takeSuccess(TResult result) {
-        Log.i(TAG, "takeSuccess_OriginalPath：" + result.getImage().getOriginalPath());
-        Log.i(TAG, "takeSuccess_CompressPath：" + result.getImage().getCompressPath());
-        Log.i(TAG, "takeSuccess_isCompress：" + result.getImage().isCompressed());
-        Glide.with(this).load(new File(result.getImage().getOriginalPath())).into(imageIv);
+        TImage image = result.getImage();
+        Log.i(TAG, "takeSuccess_OriginalPath：" + image.getOriginalPath());
+        Log.i(TAG, "takeSuccess_CompressPath：" + image.getCompressPath());
+        Log.i(TAG, "takeSuccess_isCompress：" + image.isCompressed());
+        String path = image.isCompressed() ? image.getCompressPath() : image.getOriginalPath();
+        Glide.with(this).load(new File(path))
+                .diskCacheStrategy(DiskCacheStrategy.NONE).skipMemoryCache(true)
+                .into(imageIv);
     }
 
     @Override

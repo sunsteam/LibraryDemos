@@ -93,7 +93,10 @@ dependencies {
     compile "com.android.support:appcompat-v7:$rootProject.versions.libSupport"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     //网络
-    compile "com.squareup.retrofit2:retrofit:$rootProject.versions.libRetrofit"
+    compile ("com.squareup.retrofit2:retrofit:$rootProject.versions.libRetrofit", {
+        exclude module: 'rxjava', group: 'io.reactivex'
+        exclude module: 'rxandroid', group: 'io.reactivex'
+    })
     compile "com.squareup.retrofit2:converter-gson:$rootProject.versions.libRetrofit"
     compile "com.squareup.retrofit2:adapter-rxjava2:$rootProject.versions.libRetrofit"
     compile "com.squareup.okhttp3:okhttp:$rootProject.versions.libOkhttp"

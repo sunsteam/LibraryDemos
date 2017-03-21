@@ -12,6 +12,7 @@
     <style name="PickImageDialog" parent="@style/Theme.AppCompat.Dialog">
         <item name="android:background">@android:color/transparent</item>
         <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
         <!-- 背景是否变暗显示 -->
         <item name="android:backgroundDimEnabled">true</item>
     </style>

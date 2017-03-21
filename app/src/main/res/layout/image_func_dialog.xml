@@ -45,16 +45,13 @@
     </LinearLayout>
 
     <TextView
-        android:id="@id/btn_cancel"
+        android:id="@+id/btn_cancel"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"
         android:layout_marginTop="@dimen/dp_8"
         android:text="@string/cancel"
         android:gravity="center"
-        android:background="@drawable/radius_10_rect"
-        app:backgroundTint="#fff"
-        tools:backgroundTint="#fff"
-        tools:ignore="MissingPrefix"
+        android:background="@drawable/radius_10_rect_white"
         android:textColor="@color/black_333333"/>
 
 </LinearLayout>
