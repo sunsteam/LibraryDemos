@@ -1,4 +1,4 @@
-package com.yomii.librarydemos.retrofit;
+package com.yomii.librarydemos.rxretrofit;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -36,8 +36,8 @@ public class RetrofitManager {
 
 
 
-    private Retrofit dRetrofit;
-    private Retrofit gRetrofit;
+    private Retrofit doubanRetro;
+    private Retrofit githubRetro;
 
     private Retrofit.Builder generateCommonRetrofitBuilder() {
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").create();
@@ -56,8 +56,8 @@ public class RetrofitManager {
 
     public void generateRetrofit(){
         Retrofit.Builder builder = generateCommonRetrofitBuilder();
-        dRetrofit = builder.baseUrl(URL_DOUBAN).build();
-        gRetrofit = builder.baseUrl(URL_GITHUB).build();
+        doubanRetro = builder.baseUrl(URL_DOUBAN).build();
+        githubRetro = builder.baseUrl(URL_GITHUB).build();
     }
 
 

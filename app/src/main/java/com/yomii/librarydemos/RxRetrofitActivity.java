@@ -8,7 +8,7 @@ public class RxRetrofitActivity extends BaseActivity {
 
     @Override
     protected void onInitView() {
-
+        
     }
 
     @Override
