@@ -93,10 +93,7 @@ dependencies {
     compile "com.android.support:appcompat-v7:$rootProject.versions.libSupport"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     //网络
-    compile ("com.squareup.retrofit2:retrofit:$rootProject.versions.libRetrofit", {
-        exclude module: 'rxjava', group: 'io.reactivex'
-        exclude module: 'rxandroid', group: 'io.reactivex'
-    })
+    compile "com.squareup.retrofit2:retrofit:$rootProject.versions.libRetrofit"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.versions.libRetrofit"
     compile "com.squareup.retrofit2:adapter-rxjava2:$rootProject.versions.libRetrofit"
     compile "com.squareup.okhttp3:okhttp:$rootProject.versions.libOkhttp"
@@ -104,12 +101,16 @@ dependencies {
     //rx
     compile "io.reactivex.rxjava2:rxjava:$rootProject.versions.libRxJava"
     compile "io.reactivex.rxjava2:rxandroid:$rootProject.versions.libRxJava"
+    compile "com.jakewharton.rxbinding2:rxbinding:$rootProject.versions.libRxBinding"
     //依赖注入
     compile "com.jakewharton:butterknife:$rootProject.versions.libButterKnife"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.versions.libButterKnife"
     //图片
     compile 'com.github.bumptech.glide:glide:3.7.0'
     //图片裁剪库 https://github.com/crazycodeboy/TakePhoto
-    compile 'com.jph.takephoto:takephoto_library:4.0.3'
+    compile ('com.jph.takephoto:takephoto_library:4.0.3', {
+        exclude module: 'rxjava', group: 'io.reactivex'
+        exclude module: 'rxandroid', group: 'io.reactivex'
+    })
 
 }

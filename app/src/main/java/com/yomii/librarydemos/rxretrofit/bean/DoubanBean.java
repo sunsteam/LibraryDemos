@@ -1,10 +1,13 @@
 package com.yomii.librarydemos.rxretrofit.bean;
 
+import java.util.List;
+
 /**
+ * 豆瓣api返回结果封装
  * Created by Yomii on 2017/3/22.
  */
 
-public class Bean<T> {
+public class DoubanBean<T> {
 
 
     /**
@@ -18,6 +21,8 @@ public class Bean<T> {
     private int start;
     private int total;
     private String title;
+
+    private List<T> subjects;
 
     public int getCount() {
         return count;
@@ -49,5 +54,13 @@ public class Bean<T> {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<T> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<T> subjects) {
+        this.subjects = subjects;
     }
 }

@@ -7,4 +7,6 @@
     <string name="image_source_camera">拍照</string>
     <string name="image_source_album">从手机相册选取</string>
     <string name="cancel">取消</string>
+    <string name="douban_movie">豆瓣电影</string>
+    <string name="douban_book">豆瓣图书</string>
 </resources>

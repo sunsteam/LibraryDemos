@@ -3,6 +3,7 @@ package com.yomii.librarydemos.rxretrofit.bean;
 import java.util.List;
 
 /**
+ * 电影
  * Created by Yomii on 2017/3/22.
  */
 

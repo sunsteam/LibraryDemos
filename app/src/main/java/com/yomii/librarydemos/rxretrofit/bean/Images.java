@@ -1,5 +1,8 @@
 package com.yomii.librarydemos.rxretrofit.bean;
 
+/**
+ * 图片
+ */
 public class Images {
         /**
          * small : http://img7.doubanio.com/view/movie_poster_cover/ipst/public/p2417948644.jpg

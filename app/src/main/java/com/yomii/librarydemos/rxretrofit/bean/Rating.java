@@ -1,5 +1,8 @@
 package com.yomii.librarydemos.rxretrofit.bean;
 
+/**
+ * 星级
+ */
 public class Rating {
         /**
          * max : 10
