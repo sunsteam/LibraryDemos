@@ -16,7 +16,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar">
 
         <!--glide配置文件-->
         <meta-data
@@ -38,10 +38,10 @@
         <activity android:name=".RxRetrofitActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".rxretrofit.DoubanMovieActivity"
+        <activity android:name=".rxretrofit.DoubanActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".rxretrofit.DoubanBookActivity"
+        <activity android:name=".rxretrofit.GithubActivity"
             android:screenOrientation="portrait"/>
     </application>
 

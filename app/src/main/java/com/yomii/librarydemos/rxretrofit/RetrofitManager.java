@@ -55,13 +55,17 @@ public class RetrofitManager {
                 .addConverterFactory(GsonConverterFactory.create(gson));
     }
 
-    public void generateRetrofit(){
+    private void generateRetrofit(){
         Retrofit.Builder builder = generateCommonRetrofitBuilder();
         doubanRetro = builder.baseUrl(URL_DOUBAN).build();
         githubRetro = builder.baseUrl(URL_GITHUB).build();
     }
 
+    public Retrofit getDoubanRetro() {
+        return doubanRetro;
+    }
 
-
-
+    public Retrofit getGithubRetro() {
+        return githubRetro;
+    }
 }

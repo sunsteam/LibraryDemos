@@ -224,5 +224,24 @@ public class Movie {
         public void setId(String id) {
             this.id = id;
         }
+
+    }
+
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "rating=" + rating +
+                ", title='" + title + '\'' +
+                ", collect_count=" + collect_count +
+                ", original_title='" + original_title + '\'' +
+                ", subtype='" + subtype + '\'' +
+                ", year='" + year + '\'' +
+                ", images=" + images +
+                ", alt='" + alt + '\'' +
+                ", id='" + id + '\'' +
+                ", genres=" + genres +
+                ", casts=" + casts +
+                ", directors=" + directors +
+                '}';
     }
 }

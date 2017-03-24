@@ -20,8 +20,12 @@ public class RxRetrofitActivity extends BaseActivity {
 
     }
 
-    public void toMovie(View v){
+    public void toDouban(View v){
+        PageUtils.doubanActivity(this);
+    }
 
+    public void toGithub(View v){
+        PageUtils.githubActivity(this);
     }
 
 }

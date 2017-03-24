@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
                 PageUtils.imageFuncActivity(this);
                 break;
             case R.id.button_rx_retrofit:
-                PageUtils.RxRetrofitActivity(this);
+                PageUtils.rxRetrofitActivity(this);
                 break;
         }
 

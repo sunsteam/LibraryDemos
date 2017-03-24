@@ -91,6 +91,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     //support
     compile "com.android.support:appcompat-v7:$rootProject.versions.libSupport"
+    compile "com.android.support:recyclerview-v7:$rootProject.versions.libSupport"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     //网络
     compile "com.squareup.retrofit2:retrofit:$rootProject.versions.libRetrofit"

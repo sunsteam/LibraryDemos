@@ -1,19 +1,18 @@
 package com.yomii.librarydemos.rxretrofit;
 
 import com.yomii.librarydemos.BaseActivity;
-import com.yomii.librarydemos.R;
 
 /**
- * 豆瓣电影
+ * github
  * Created by Yomii on 2017/3/23.
  */
 
-public class DoubanMovieActivity extends BaseActivity {
+public class GithubActivity extends BaseActivity {
 
 
     @Override
     protected void onInitView() {
-        setContentView(R.layout.douban_movie_activity);
+
     }
 
     @Override

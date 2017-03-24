@@ -8,18 +8,20 @@
     android:paddingRight="@dimen/dp_16">
 
     <Button
-        android:id="@+id/btn_douban_movie"
+        android:id="@+id/btn_douban"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_50"
-        android:text="@string/douban_movie"/>
+        android:text="@string/douban_movie"
+        android:onClick="toDouban"/>
 
     <Button
-        android:id="@+id/btn_douban_reading"
+        android:id="@+id/btn_github"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_12"
-        android:text="@string/douban_book"/>
+        android:text="@string/douban_book"
+        android:onClick="toGithub"/>
 
 
 </LinearLayout>
