@@ -1,5 +1,8 @@
 package com.yomii.librarydemos.rxretrofit.bean;
 
+import android.os.Parcel;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,7 +10,7 @@ import java.util.List;
  * Created by Yomii on 2017/3/22.
  */
 
-public class Movie {
+public class Movie implements Cover {
 
 
     /**
@@ -46,6 +49,7 @@ public class Movie {
         this.rating = rating;
     }
 
+    @Override
     public String getTitle() {
         return title;
     }
@@ -132,6 +136,20 @@ public class Movie {
 
     public void setDirectors(List<Directors> directors) {
         this.directors = directors;
+    }
+
+    @Override
+    public String getCoverUrl() {
+        Images images = getImages();
+        return images == null ? null : images.getLarge();
+    }
+
+    @Override
+    public double getRatingValue() {
+        Rating rating = getRating();
+        if (rating != null)
+            return rating.getRating();
+        return 0;
     }
 
     public static class Casts {
@@ -244,4 +262,58 @@ public class Movie {
                 ", directors=" + directors +
                 '}';
     }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(this.rating, flags);
+        dest.writeString(this.title);
+        dest.writeInt(this.collect_count);
+        dest.writeString(this.original_title);
+        dest.writeString(this.subtype);
+        dest.writeString(this.year);
+        dest.writeParcelable(this.images, flags);
+        dest.writeString(this.alt);
+        dest.writeString(this.id);
+        dest.writeStringList(this.genres);
+        dest.writeList(this.casts);
+        dest.writeList(this.directors);
+    }
+
+    public Movie() {
+    }
+
+    protected Movie(Parcel in) {
+        this.rating = in.readParcelable(Rating.class.getClassLoader());
+        this.title = in.readString();
+        this.collect_count = in.readInt();
+        this.original_title = in.readString();
+        this.subtype = in.readString();
+        this.year = in.readString();
+        this.images = in.readParcelable(Images.class.getClassLoader());
+        this.alt = in.readString();
+        this.id = in.readString();
+        this.genres = in.createStringArrayList();
+        this.casts = new ArrayList<>();
+        in.readList(this.casts, Casts.class.getClassLoader());
+        this.directors = new ArrayList<>();
+        in.readList(this.directors, Directors.class.getClassLoader());
+    }
+
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel(Parcel source) {
+            return new Movie(source);
+        }
+
+        @Override
+        public Movie[] newArray(int size) {
+            return new Movie[size];
+        }
+    };
 }

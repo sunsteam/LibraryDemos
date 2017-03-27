@@ -3,8 +3,9 @@ package com.yomii.librarydemos;
 import android.content.Context;
 import android.content.Intent;
 
-import com.yomii.librarydemos.rxretrofit.GithubActivity;
 import com.yomii.librarydemos.rxretrofit.DoubanActivity;
+import com.yomii.librarydemos.rxretrofit.GithubActivity;
+import com.yomii.librarydemos.rxretrofit.bean.Cover;
 
 /**
  * 页面跳转辅助类
@@ -27,5 +28,12 @@ public class PageUtils {
 
     public static void githubActivity(Context context){
         context.startActivity(new Intent(context, GithubActivity.class));
+    }
+
+    public static void doubanDetailActivity(Context context, Cover data){
+        Intent intent = new Intent();
+        intent.setAction("Douban.data.detail");
+        intent.putExtra("data", data);
+        context.startActivity(intent);
     }
 }

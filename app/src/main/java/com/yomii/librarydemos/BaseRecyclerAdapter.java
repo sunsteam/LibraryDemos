@@ -21,7 +21,9 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
     }
 
     public BaseRecyclerAdapter(List<T> dataList) {
-        this.dataList = (dataList == null ? new ArrayList<T>() : dataList);
+        this.dataList = new ArrayList<>();
+        if (dataList != null)
+            this.dataList.addAll(dataList);
         setHasStableIds(true);
     }
 
@@ -29,14 +31,15 @@ public abstract class BaseRecyclerAdapter<T> extends RecyclerView.Adapter<BaseRe
         return dataList;
     }
 
-    public void setDataList(List<T> dataList) {
+    public void setDataList(List<? extends T> dataList) {
         if (dataList != null) {
-            this.dataList = dataList;
+            this.dataList.clear();
+            this.dataList.addAll(dataList);
             notifyDataSetChanged();
         }
     }
 
-    public void addDataFromList(List<T> dataList) {
+    public void addDataFromList(List<? extends T> dataList) {
         if (dataList != null) {
             this.dataList.addAll(dataList);
             notifyDataSetChanged();

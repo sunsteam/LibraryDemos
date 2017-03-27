@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/dp_3"
+    android:paddingRight="@dimen/dp_3"
+    android:gravity="center_vertical">
+
+    <ImageView
+        android:contentDescription="@string/cover_image"
+        android:id="@+id/cover_image"
+        android:layout_width="@dimen/dp_135"
+        android:layout_height="@dimen/dp_190"
+        android:layout_marginBottom="@dimen/dp_3"
+        android:scaleType="fitXY"/>
+
+    <TextView
+        android:id="@+id/cover_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:layout_marginRight="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_3"
+        android:ellipsize="end"
+        android:textSize="@dimen/sp_12"
+        android:textColor="@color/black_333333"
+        android:lines="1"
+        tools:text="金刚：骷髅岛"/>
+
+    <RatingBar
+        android:id="@+id/cover_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/dp_16"
+        android:maxHeight="@dimen/dp_32"
+        style="@android:style/Widget.DeviceDefault.RatingBar.Small"
+        android:layout_marginLeft="@dimen/dp_5"
+        android:layout_marginRight="@dimen/dp_5"
+        android:layout_marginBottom="@dimen/dp_3"
+        android:numStars="5"
+        android:isIndicator="true"
+        android:rating="1"
+        />
+
+</LinearLayout>
