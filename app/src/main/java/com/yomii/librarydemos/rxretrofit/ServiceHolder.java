@@ -1,7 +1,6 @@
 package com.yomii.librarydemos.rxretrofit;
 
-import com.yomii.librarydemos.rxretrofit.webservice.DoubanBookService;
-import com.yomii.librarydemos.rxretrofit.webservice.DoubanMovieService;
+import com.yomii.librarydemos.rxretrofit.webservice.DoubanService;
 
 /**
  *
@@ -11,30 +10,18 @@ import com.yomii.librarydemos.rxretrofit.webservice.DoubanMovieService;
 public class ServiceHolder {
 
 
-    private static DoubanMovieService movieService;
-    private static DoubanBookService bookService;
+    private static DoubanService doubanService;
 
-    public static DoubanMovieService getMovieService() {
-        if (movieService == null) {
+    public static DoubanService getDoubanService() {
+        if (doubanService == null) {
             synchronized (ServiceHolder.class) {
-                if (movieService == null) {
-                    movieService = RetrofitManager.getInstance()
-                            .getDoubanRetro().create(DoubanMovieService.class);
+                if (doubanService == null) {
+                    doubanService = RetrofitManager.getInstance()
+                            .getDoubanRetro().create(DoubanService.class);
                 }
             }
         }
-        return movieService;
+        return doubanService;
     }
 
-    public static DoubanBookService getBookService() {
-        if (bookService == null) {
-            synchronized (ServiceHolder.class) {
-                if (bookService == null) {
-                    bookService = RetrofitManager.getInstance()
-                            .getDoubanRetro().create(DoubanBookService.class);
-                }
-            }
-        }
-        return bookService;
-    }
 }

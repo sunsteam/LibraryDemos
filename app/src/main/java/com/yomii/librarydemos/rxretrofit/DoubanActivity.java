@@ -56,7 +56,7 @@ public class DoubanActivity extends BaseActivity {
 
     @Override
     protected void onInitData() {
-        ServiceHolder.getMovieService().getCurrentMovies()
+        ServiceHolder.getDoubanService().getCurrentMovies()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new DefaultObserver<DoubanBean<Movie>>() {
                     @Override

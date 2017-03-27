@@ -1,9 +1,6 @@
 package com.yomii.librarydemos.rxretrofit.adapter;
 
-import android.app.Activity;
-import android.content.Context;
 import android.support.annotation.LayoutRes;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,6 +10,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yomii.librarydemos.BaseRecyclerAdapter;
 import com.yomii.librarydemos.BaseRecyclerHolder;
+import com.yomii.librarydemos.PageUtils;
 import com.yomii.librarydemos.R;
 import com.yomii.librarydemos.rxretrofit.bean.Cover;
 
@@ -28,7 +26,7 @@ public class CoverAdapter extends BaseRecyclerAdapter<Cover> {
         return new CoverHolder(parent, R.layout.douban_recycler);
     }
 
-    private class CoverHolder extends BaseRecyclerHolder<Cover>{
+    private class CoverHolder extends BaseRecyclerHolder<Cover> {
 
 
         private ImageView coverView;
@@ -44,7 +42,9 @@ public class CoverAdapter extends BaseRecyclerAdapter<Cover> {
             Glide.with(coverView.getContext())
                     .load(data.getCoverUrl())
                     .into(coverView);
+
             titleView.setText(data.getTitle());
+
             double percent = data.getRatingValue();
             float value = (float) (percent * ratingBar.getNumStars());
             ratingBar.setRating(value);
@@ -58,9 +58,7 @@ public class CoverAdapter extends BaseRecyclerAdapter<Cover> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Context context = v.getContext();
-                    Log.i("是不是activity: ", (context instanceof Activity) + "");
-//                    PageUtils.doubanDetailActivity(v.getContext(),data);
+                    PageUtils.doubanDetailActivity(v.getContext(), data);
                 }
             });
         }
