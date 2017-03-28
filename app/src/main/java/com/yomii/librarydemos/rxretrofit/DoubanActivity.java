@@ -7,13 +7,15 @@ import android.util.Log;
 import com.yomii.librarydemos.BaseActivity;
 import com.yomii.librarydemos.R;
 import com.yomii.librarydemos.rxretrofit.adapter.CoverAdapter;
+import com.yomii.librarydemos.rxretrofit.bean.Cover;
 import com.yomii.librarydemos.rxretrofit.bean.DoubanBean;
-import com.yomii.librarydemos.rxretrofit.bean.Movie;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.observers.DefaultObserver;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 
 /**
  * 豆瓣电影/图书
@@ -31,12 +33,21 @@ public class DoubanActivity extends BaseActivity {
 
     private CoverAdapter movieAdapter;
     private CoverAdapter bookAdapter;
+    private CoverObserver movieObserver;
+    private CoverObserver bookObserver;
+
+    private int movieIndex;
+    private int bookIndex;
 
     @Override
     protected void onInitVariable() {
         super.onInitVariable();
         movieAdapter = new CoverAdapter();
         bookAdapter = new CoverAdapter();
+
+        movieObserver = new CoverObserver("movie");
+        bookObserver = new CoverObserver("book");
+
     }
 
     @Override
@@ -44,36 +55,129 @@ public class DoubanActivity extends BaseActivity {
         setContentView(R.layout.douban_activity);
         ButterKnife.bind(this);
 
-        LinearLayoutManager movieManager = new LinearLayoutManager(this, LinearLayoutManager
+        final LinearLayoutManager movieManager = new LinearLayoutManager(this, LinearLayoutManager
                 .HORIZONTAL, false);
         movieRecycle.setLayoutManager(movieManager);
         movieRecycle.setAdapter(movieAdapter);
+
+
         LinearLayoutManager bookManager = new LinearLayoutManager(this, LinearLayoutManager
                 .HORIZONTAL, false);
         bookRecycle.setLayoutManager(bookManager);
         bookRecycle.setAdapter(bookAdapter);
+
     }
 
     @Override
     protected void onInitData() {
-        ServiceHolder.getDoubanService().getCurrentMovies()
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new DefaultObserver<DoubanBean<Movie>>() {
-                    @Override
-                    public void onNext(DoubanBean<Movie> value) {
-                        movieAdapter.setDataList(value.getSubjects());
-                    }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.w("movie: ", "error");
-                        e.printStackTrace();
-                    }
+        loadMovie();
 
-                    @Override
-                    public void onComplete() {
-                        Log.i("movie: ", "complete");
-                    }
-                });
+        loadBook();
+
+        movieRecycle.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                //手指向左滑动且下一个索引可用且Observer并没有在观察中
+                if (dx > 0 && movieIndex > 0 && movieObserver.isDisposed()) {
+                    int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
+                    int itemCount = recyclerView.getLayoutManager().getItemCount();
+                    //有内容且倒数第二个内容可见
+                    if (itemCount > 0 && lastPosition == itemCount - 2)
+                        loadMovie();
+                }
+            }
+        });
+
+        bookRecycle.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                //手指向左滑动且下一个索引可用且Observer并没有在观察中
+                if (dx > 0 && bookIndex > 0 && bookObserver.isDisposed()) {
+                    int lastPosition = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
+                    int itemCount = recyclerView.getLayoutManager().getItemCount();
+                    //有内容且倒数第二个内容可见
+                    if (itemCount > 0 && lastPosition == itemCount - 2)
+                        loadBook();
+                }
+            }
+        });
     }
+
+    private void loadMovie() {
+        ServiceHolder.getDoubanService().getCurrentMovies(10, movieIndex)
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnDispose(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        Log.w("onDispose", "movie");
+                    }
+                })
+                .subscribe(movieObserver);
+    }
+
+    private void loadBook() {
+        ServiceHolder.getDoubanService().getBooks(null, "小说", 10, bookIndex)
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnDispose(new Action() {
+                    @Override
+                    public void run() throws Exception {
+                        Log.w("onDispose", "book");
+                    }
+                })
+                .subscribe(bookObserver);
+    }
+
+    private class CoverObserver implements Observer<DoubanBean<? extends Cover>>, Disposable {
+
+        private String type;
+        private Disposable d;
+
+        public CoverObserver(String type) {
+            this.type = type;
+        }
+
+        @Override
+        public void onSubscribe(Disposable d) {
+            this.d = d;
+        }
+
+        @Override
+        public void onNext(DoubanBean<? extends Cover> value) {
+            switch (type) {
+                case "movie":
+                    movieIndex = value.getNextStart();
+                    movieAdapter.addDataFromList(value.getSubjects());
+                    break;
+                case "book":
+                    bookIndex = value.getNextStart();
+                    bookAdapter.addDataFromList(value.getSubjects());
+                    break;
+            }
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            Log.w(type, "error");
+            e.printStackTrace();
+            dispose();
+        }
+
+        @Override
+        public void onComplete() {
+            Log.i(type, "complete");
+            dispose();
+        }
+
+        @Override
+        public void dispose() {
+            d.dispose();
+        }
+
+        @Override
+        public boolean isDisposed() {
+            return d.isDisposed();
+        }
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.yomii.librarydemos.rxretrofit.bean;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 /**
@@ -22,6 +24,7 @@ public class DoubanBean<T> {
     private int total;
     private String title;
 
+    @SerializedName(value = "subjects", alternate = {"books"})
     private List<T> subjects;
 
     public int getCount() {
@@ -62,5 +65,18 @@ public class DoubanBean<T> {
 
     public void setSubjects(List<T> subjects) {
         this.subjects = subjects;
+    }
+
+    /**
+     * 获取下一次请求的索引条目号
+     *
+     * @return 没有数据时返回-2 , 已请求到所有数据时返回-1, 可以请求时返回大于0的数
+     */
+    public int getNextStart() {
+        if (total == 0)
+            return -2;
+        if (start + count >= total)
+            return -1;
+        return start + count;
     }
 }
