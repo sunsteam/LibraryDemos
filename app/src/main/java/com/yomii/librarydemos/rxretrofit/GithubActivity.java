@@ -1,6 +1,6 @@
 package com.yomii.librarydemos.rxretrofit;
 
-import com.yomii.librarydemos.BaseActivity;
+import com.yomii.librarydemos.base.BaseActivity;
 
 /**
  * github

@@ -152,7 +152,7 @@ public class Movie implements Cover {
         return 0;
     }
 
-    public static class Casts {
+    public static class Casts implements android.os.Parcelable {
         /**
          * alt : https://movie.douban.com/celebrity/1053624/
          * avatars : {"small":"http://img7.doubanio.com/img/celebrity/small/10321.jpg","large":"http://img7.doubanio.com/img/celebrity/large/10321.jpg","medium":"http://img7.doubanio.com/img/celebrity/medium/10321.jpg"}
@@ -196,9 +196,45 @@ public class Movie implements Cover {
         public void setId(String id) {
             this.id = id;
         }
+
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.alt);
+            dest.writeParcelable(this.avatars, flags);
+            dest.writeString(this.name);
+            dest.writeString(this.id);
+        }
+
+        public Casts() {
+        }
+
+        protected Casts(Parcel in) {
+            this.alt = in.readString();
+            this.avatars = in.readParcelable(Images.class.getClassLoader());
+            this.name = in.readString();
+            this.id = in.readString();
+        }
+
+        public static final Creator<Casts> CREATOR = new Creator<Casts>() {
+            @Override
+            public Casts createFromParcel(Parcel source) {
+                return new Casts(source);
+            }
+
+            @Override
+            public Casts[] newArray(int size) {
+                return new Casts[size];
+            }
+        };
     }
 
-    public static class Directors {
+    public static class Directors implements android.os.Parcelable {
         /**
          * alt : https://movie.douban.com/celebrity/1027245/
          * avatars : {"small":"http://img7.doubanio.com/img/celebrity/small/42170.jpg","large":"http://img7.doubanio.com/img/celebrity/large/42170.jpg","medium":"http://img7.doubanio.com/img/celebrity/medium/42170.jpg"}
@@ -243,6 +279,41 @@ public class Movie implements Cover {
             this.id = id;
         }
 
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeString(this.alt);
+            dest.writeParcelable(this.avatars, flags);
+            dest.writeString(this.name);
+            dest.writeString(this.id);
+        }
+
+        public Directors() {
+        }
+
+        protected Directors(Parcel in) {
+            this.alt = in.readString();
+            this.avatars = in.readParcelable(Images.class.getClassLoader());
+            this.name = in.readString();
+            this.id = in.readString();
+        }
+
+        public static final Creator<Directors> CREATOR = new Creator<Directors>() {
+            @Override
+            public Directors createFromParcel(Parcel source) {
+                return new Directors(source);
+            }
+
+            @Override
+            public Directors[] newArray(int size) {
+                return new Directors[size];
+            }
+        };
     }
 
     @Override

@@ -8,8 +8,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.yomii.librarydemos.BaseRecyclerAdapter;
-import com.yomii.librarydemos.BaseRecyclerHolder;
+import com.yomii.librarydemos.base.BaseRecyclerAdapter;
+import com.yomii.librarydemos.base.BaseRecyclerHolder;
 import com.yomii.librarydemos.PageUtils;
 import com.yomii.librarydemos.R;
 import com.yomii.librarydemos.rxretrofit.bean.Cover;

@@ -2,7 +2,7 @@ package com.yomii.librarydemos.rxretrofit;
 
 import android.os.Parcelable;
 
-import com.yomii.librarydemos.BaseActivity;
+import com.yomii.librarydemos.base.BaseActivity;
 import com.yomii.librarydemos.rxretrofit.bean.Movie;
 
 /**

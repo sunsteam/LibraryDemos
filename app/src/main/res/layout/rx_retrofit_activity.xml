@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_50"
-        android:text="@string/douban_movie"
+        android:text="@string/douban"
         android:onClick="toDouban"/>
 
     <Button
@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_12"
-        android:text="@string/douban_book"
+        android:text="@string/github"
         android:onClick="toGithub"/>
 
 

@@ -45,6 +45,7 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="intent.category.Douban_Detail"/>
             </intent-filter>
         </activity>

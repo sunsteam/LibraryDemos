@@ -21,6 +21,7 @@ import com.jph.takephoto.permission.InvokeListener;
 import com.jph.takephoto.permission.PermissionManager;
 import com.jph.takephoto.permission.PermissionManager.TPermissionType;
 import com.jph.takephoto.permission.TakePhotoInvocationHandler;
+import com.yomii.librarydemos.base.BaseActivity;
 
 import java.io.File;
 

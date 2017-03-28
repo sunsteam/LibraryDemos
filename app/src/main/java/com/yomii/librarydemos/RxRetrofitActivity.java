@@ -2,6 +2,8 @@ package com.yomii.librarydemos;
 
 import android.view.View;
 
+import com.yomii.librarydemos.base.BaseActivity;
+
 /**
  * RxRetrofit Entry
  * Created by Yomii on 2017/3/21.

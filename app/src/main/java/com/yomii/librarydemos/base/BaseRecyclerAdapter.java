@@ -1,4 +1,4 @@
-package com.yomii.librarydemos;
+package com.yomii.librarydemos.base;
 
 import android.support.v7.widget.RecyclerView;
 

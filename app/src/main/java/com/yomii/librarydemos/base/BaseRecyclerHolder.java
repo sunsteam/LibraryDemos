@@ -1,4 +1,4 @@
-package com.yomii.librarydemos;
+package com.yomii.librarydemos.base;
 
 import android.content.Context;
 import android.support.annotation.LayoutRes;

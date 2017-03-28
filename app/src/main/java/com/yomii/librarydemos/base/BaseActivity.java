@@ -1,4 +1,4 @@
-package com.yomii.librarydemos;
+package com.yomii.librarydemos.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
-    final String TAG = getClass().getName();
+    protected final String TAG = getClass().getName();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

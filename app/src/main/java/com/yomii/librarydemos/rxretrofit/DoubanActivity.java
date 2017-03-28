@@ -4,17 +4,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import com.yomii.librarydemos.BaseActivity;
 import com.yomii.librarydemos.R;
+import com.yomii.librarydemos.base.AutoDisposeObserver;
+import com.yomii.librarydemos.base.BaseActivity;
 import com.yomii.librarydemos.rxretrofit.adapter.CoverAdapter;
 import com.yomii.librarydemos.rxretrofit.bean.Cover;
 import com.yomii.librarydemos.rxretrofit.bean.DoubanBean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
 
 /**
@@ -128,18 +127,12 @@ public class DoubanActivity extends BaseActivity {
                 .subscribe(bookObserver);
     }
 
-    private class CoverObserver implements Observer<DoubanBean<? extends Cover>>, Disposable {
+    private class CoverObserver extends AutoDisposeObserver<DoubanBean<? extends Cover>> {
 
         private String type;
-        private Disposable d;
 
-        public CoverObserver(String type) {
+        CoverObserver(String type) {
             this.type = type;
-        }
-
-        @Override
-        public void onSubscribe(Disposable d) {
-            this.d = d;
         }
 
         @Override
@@ -158,25 +151,14 @@ public class DoubanActivity extends BaseActivity {
 
         @Override
         public void onError(Throwable e) {
+            super.onError(e);
             Log.w(type, "error");
-            e.printStackTrace();
-            dispose();
         }
 
         @Override
         public void onComplete() {
+            super.onComplete();
             Log.i(type, "complete");
-            dispose();
-        }
-
-        @Override
-        public void dispose() {
-            d.dispose();
-        }
-
-        @Override
-        public boolean isDisposed() {
-            return d.isDisposed();
         }
     }
 
