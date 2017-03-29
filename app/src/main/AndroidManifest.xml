@@ -41,13 +41,8 @@
         <activity android:name=".rxretrofit.DoubanActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".rxretrofit.DoubanDetailActivity"
+        <activity android:name=".rxretrofit.MovieActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="intent.category.Douban_Detail"/>
-            </intent-filter>
         </activity>
 
         <activity android:name=".rxretrofit.GithubActivity"

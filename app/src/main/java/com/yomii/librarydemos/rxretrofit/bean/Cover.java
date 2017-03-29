@@ -11,6 +11,10 @@ public interface Cover extends Parcelable {
 
     String getCoverUrl();
 
+    /**
+     * 平均分/总分, 比如 7.5/10 = 0.75
+     * @return 星级的比率
+     */
     float getRatingValue();
 
     String getTitle();

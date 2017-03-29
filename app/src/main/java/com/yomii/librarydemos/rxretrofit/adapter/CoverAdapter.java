@@ -6,13 +6,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.yomii.librarydemos.base.BaseRecyclerAdapter;
 import com.yomii.librarydemos.base.BaseRecyclerHolder;
 import com.yomii.librarydemos.PageUtils;
 import com.yomii.librarydemos.R;
+import com.yomii.librarydemos.rxretrofit.bean.Book;
 import com.yomii.librarydemos.rxretrofit.bean.Cover;
+import com.yomii.librarydemos.rxretrofit.bean.Movie;
 
 /**
  * Douban页面RecyclerView适配器
@@ -58,7 +61,10 @@ public class CoverAdapter extends BaseRecyclerAdapter<Cover> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    PageUtils.doubanDetailActivity(v.getContext(), data);
+                    if (data instanceof Movie)
+                        PageUtils.movieDetailActivity(v.getContext(), data);
+                    else if (data instanceof Book)
+                        Toast.makeText(v.getContext(), "点击图书:" + data.getTitle(), Toast.LENGTH_SHORT).show();
                 }
             });
         }

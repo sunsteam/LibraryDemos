@@ -5,6 +5,7 @@
 
 
     <data>
+        <import type="com.yomii.librarydemos.R"/>
         <variable
             name="movie"
             type="com.yomii.librarydemos.rxretrofit.bean.Movie"/>
@@ -69,7 +70,9 @@
             app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
             app:layout_constraintRight_toLeftOf="@+id/guideline_h35"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@mipmap/ic_launcher" />
+            android:src="@{movie.coverUrl}"
+            app:placeHolder="@{R.mipmap.ic_launcher}"
+            tools:src="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/caption"
@@ -125,7 +128,7 @@
             app:layout_constraintLeft_toLeftOf="@+id/guideline_h35"
             app:layout_constraintTop_toBottomOf="@+id/tag"
             android:text="@{movie.year}"
-            tools:text="2017" />
+            tools:text="年份" />
 
         <RatingBar
             android:id="@+id/rating_bar"
@@ -138,7 +141,7 @@
             android:numStars="5"
             app:layout_constraintLeft_toLeftOf="@+id/guideline_h35"
             app:layout_constraintTop_toBottomOf="@+id/year"
-            android:rating="@{5 * movie.ratingValue}"
+            android:rating="@{movie.ratingValue * 5}"
             tools:rating="3.5" />
 
         <TextView

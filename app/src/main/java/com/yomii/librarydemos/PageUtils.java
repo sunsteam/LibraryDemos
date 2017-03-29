@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.yomii.librarydemos.rxretrofit.DoubanActivity;
 import com.yomii.librarydemos.rxretrofit.GithubActivity;
+import com.yomii.librarydemos.rxretrofit.MovieActivity;
 import com.yomii.librarydemos.rxretrofit.bean.Cover;
 
 /**
@@ -14,7 +15,6 @@ import com.yomii.librarydemos.rxretrofit.bean.Cover;
 
 public class PageUtils {
 
-    public static final String CATEGORY_DOUBAN_DETAIL = "intent.category.Douban_Detail";
 
     public static void imageFuncActivity(Context context){
         context.startActivity(new Intent(context, ImageFuncActivity.class));
@@ -32,9 +32,8 @@ public class PageUtils {
         context.startActivity(new Intent(context, GithubActivity.class));
     }
 
-    public static void doubanDetailActivity(Context context, Cover data){
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.addCategory(CATEGORY_DOUBAN_DETAIL);
+    public static void movieDetailActivity(Context context, Cover data){
+        Intent intent = new Intent(context, MovieActivity.class);
         intent.putExtra("data", data);
         context.startActivity(intent);
     }
