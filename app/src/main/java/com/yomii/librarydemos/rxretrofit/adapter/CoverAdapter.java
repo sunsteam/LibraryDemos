@@ -45,8 +45,8 @@ public class CoverAdapter extends BaseRecyclerAdapter<Cover> {
 
             titleView.setText(data.getTitle());
 
-            double percent = data.getRatingValue();
-            float value = (float) (percent * ratingBar.getNumStars());
+            float percent = data.getRatingValue();
+            float value = percent * ratingBar.getNumStars();
             ratingBar.setRating(value);
         }
 

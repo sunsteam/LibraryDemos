@@ -20,12 +20,14 @@ public abstract class AutoDisposeObserver<T> implements Observer<T>, Disposable 
     @Override
     public void onError(Throwable e) {
         e.printStackTrace();
-        dispose();
+        if (!isDisposed())
+            dispose();
     }
 
     @Override
     public void onComplete() {
-        dispose();
+        if (!isDisposed())
+            dispose();
     }
 
     @Override

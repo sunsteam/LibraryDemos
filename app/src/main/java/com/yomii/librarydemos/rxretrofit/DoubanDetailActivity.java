@@ -3,6 +3,7 @@ package com.yomii.librarydemos.rxretrofit;
 import android.os.Parcelable;
 
 import com.yomii.librarydemos.base.BaseActivity;
+import com.yomii.librarydemos.rxretrofit.bean.Book;
 import com.yomii.librarydemos.rxretrofit.bean.Movie;
 
 /**
@@ -18,7 +19,10 @@ public class DoubanDetailActivity extends BaseActivity {
         Parcelable data = getIntent().getParcelableExtra("data");
         if (data instanceof Movie){
 
+        }else if (data instanceof Book){
+
         }
+
     }
 
     @Override

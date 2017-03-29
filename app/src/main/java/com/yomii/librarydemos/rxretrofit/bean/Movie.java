@@ -38,8 +38,8 @@ public class Movie implements Cover {
     private String alt;
     private String id;
     private List<String> genres;
-    private List<Casts> casts;
-    private List<Directors> directors;
+    private List<Staff> casts;
+    private List<Staff> directors;
 
     public Rating getRating() {
         return rating;
@@ -122,120 +122,34 @@ public class Movie implements Cover {
         this.genres = genres;
     }
 
-    public List<Casts> getCasts() {
+    public List<Staff> getCasts() {
         return casts;
     }
 
-    public void setCasts(List<Casts> casts) {
+    public void setCasts(List<Staff> casts) {
         this.casts = casts;
     }
 
-    public List<Directors> getDirectors() {
+    public List<Staff> getDirectors() {
         return directors;
     }
 
-    public void setDirectors(List<Directors> directors) {
+    public void setDirectors(List<Staff> directors) {
         this.directors = directors;
     }
 
-    @Override
-    public String getCoverUrl() {
-        Images images = getImages();
-        return images == null ? null : images.getLarge();
-    }
 
-    @Override
-    public double getRatingValue() {
-        Rating rating = getRating();
-        if (rating != null)
-            return rating.getRating();
-        return 0;
-    }
 
-    public static class Casts implements android.os.Parcelable {
+    public static class Staff implements android.os.Parcelable {
+
         /**
+         * 演员
          * alt : https://movie.douban.com/celebrity/1053624/
          * avatars : {"small":"http://img7.doubanio.com/img/celebrity/small/10321.jpg","large":"http://img7.doubanio.com/img/celebrity/large/10321.jpg","medium":"http://img7.doubanio.com/img/celebrity/medium/10321.jpg"}
          * name : 艾玛·沃森
          * id : 1053624
-         */
-
-        private String alt;
-        private Images avatars;
-        private String name;
-        private String id;
-
-        public String getAlt() {
-            return alt;
-        }
-
-        public void setAlt(String alt) {
-            this.alt = alt;
-        }
-
-        public Images getAvatars() {
-            return avatars;
-        }
-
-        public void setAvatars(Images avatars) {
-            this.avatars = avatars;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getId() {
-            return id;
-        }
-
-        public void setId(String id) {
-            this.id = id;
-        }
-
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeString(this.alt);
-            dest.writeParcelable(this.avatars, flags);
-            dest.writeString(this.name);
-            dest.writeString(this.id);
-        }
-
-        public Casts() {
-        }
-
-        protected Casts(Parcel in) {
-            this.alt = in.readString();
-            this.avatars = in.readParcelable(Images.class.getClassLoader());
-            this.name = in.readString();
-            this.id = in.readString();
-        }
-
-        public static final Creator<Casts> CREATOR = new Creator<Casts>() {
-            @Override
-            public Casts createFromParcel(Parcel source) {
-                return new Casts(source);
-            }
-
-            @Override
-            public Casts[] newArray(int size) {
-                return new Casts[size];
-            }
-        };
-    }
-
-    public static class Directors implements android.os.Parcelable {
-        /**
+         * <p>
+         * 制片人
          * alt : https://movie.douban.com/celebrity/1027245/
          * avatars : {"small":"http://img7.doubanio.com/img/celebrity/small/42170.jpg","large":"http://img7.doubanio.com/img/celebrity/large/42170.jpg","medium":"http://img7.doubanio.com/img/celebrity/medium/42170.jpg"}
          * name : 比尔·康顿
@@ -293,28 +207,29 @@ public class Movie implements Cover {
             dest.writeString(this.id);
         }
 
-        public Directors() {
+        public Staff() {
         }
 
-        protected Directors(Parcel in) {
+        protected Staff(Parcel in) {
             this.alt = in.readString();
             this.avatars = in.readParcelable(Images.class.getClassLoader());
             this.name = in.readString();
             this.id = in.readString();
         }
 
-        public static final Creator<Directors> CREATOR = new Creator<Directors>() {
+        public static final Creator<Staff> CREATOR = new Creator<Staff>() {
             @Override
-            public Directors createFromParcel(Parcel source) {
-                return new Directors(source);
+            public Staff createFromParcel(Parcel source) {
+                return new Staff(source);
             }
 
             @Override
-            public Directors[] newArray(int size) {
-                return new Directors[size];
+            public Staff[] newArray(int size) {
+                return new Staff[size];
             }
         };
     }
+
 
     @Override
     public String toString() {
@@ -371,9 +286,9 @@ public class Movie implements Cover {
         this.id = in.readString();
         this.genres = in.createStringArrayList();
         this.casts = new ArrayList<>();
-        in.readList(this.casts, Casts.class.getClassLoader());
+        in.readList(this.casts, Staff.class.getClassLoader());
         this.directors = new ArrayList<>();
-        in.readList(this.directors, Directors.class.getClassLoader());
+        in.readList(this.directors, Staff.class.getClassLoader());
     }
 
     public static final Creator<Movie> CREATOR = new Creator<Movie>() {
@@ -387,4 +302,42 @@ public class Movie implements Cover {
             return new Movie[size];
         }
     };
+
+    /*-***********************************业务相关****************************************-*/
+
+    @Override
+    public String getCoverUrl() {
+        Images images = getImages();
+        return images == null ? null : images.getLarge();
+    }
+
+    @Override
+    public float getRatingValue() {
+        Rating rating = getRating();
+        if (rating != null)
+            return (float) rating.getRating();
+        return 0f;
+    }
+
+    public float getRatingAverage() {
+        Rating rating = getRating();
+        if (rating != null)
+            return (float) rating.getAverage();
+        return 0f;
+    }
+
+    public String getTags(){
+        List<String> genres = getGenres();
+        if (genres != null && genres.size() > 0){
+            StringBuilder stringBuilder = new StringBuilder();
+            int size = genres.size();
+            for (int i = 0; i < size; i++) {
+                if (i != 0)
+                    stringBuilder.append(" | ");
+                stringBuilder.append(genres.get(i));
+            }
+            return stringBuilder.toString();
+        }
+        return "";
+    }
 }

@@ -224,11 +224,18 @@ public class Book implements Cover {
     }
 
     @Override
-    public double getRatingValue() {
+    public float getRatingValue() {
         Rating rating = getRating();
         if (rating != null)
-            return rating.getRating();
-        return 0;
+            return (float) rating.getRating();
+        return 0f;
+    }
+
+    public float getRatingAverage() {
+        Rating rating = getRating();
+        if (rating != null)
+            return (float) rating.getAverage();
+        return 0f;
     }
 
     @Override

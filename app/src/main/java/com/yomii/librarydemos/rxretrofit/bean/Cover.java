@@ -11,7 +11,7 @@ public interface Cover extends Parcelable {
 
     String getCoverUrl();
 
-    double getRatingValue();
+    float getRatingValue();
 
     String getTitle();
 }

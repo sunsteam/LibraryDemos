@@ -162,4 +162,11 @@ public class DoubanActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        movieObserver.dispose();
+        bookObserver.dispose();
+        super.onDestroy();
+
+    }
 }
