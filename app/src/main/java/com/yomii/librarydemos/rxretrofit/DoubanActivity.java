@@ -39,8 +39,8 @@ public class DoubanActivity extends BaseActivity {
     private int bookIndex;
 
     @Override
-    protected void onInitVariable() {
-        super.onInitVariable();
+    protected void onInitVariableOrFlag() {
+        super.onInitVariableOrFlag();
         movieAdapter = new CoverAdapter();
         bookAdapter = new CoverAdapter();
 

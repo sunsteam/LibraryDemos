@@ -2,10 +2,10 @@ package com.yomii.librarydemos.rxretrofit;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.yomii.librarydemos.BuildConfig;
 
 import java.util.concurrent.TimeUnit;
 
-import io.reactivex.android.BuildConfig;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
