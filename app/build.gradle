@@ -12,6 +12,8 @@ android {
 
         applicationId "com.yomii.librarydemos"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        //开启Vector支持
+        vectorDrawables.setUseSupportLibrary(true)
     }
 
     dataBinding{

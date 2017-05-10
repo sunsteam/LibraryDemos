@@ -1,6 +1,10 @@
 package com.yomii.librarydemos.rxretrofit.bean;
 
+import android.app.Activity;
 import android.os.Parcel;
+import android.view.View;
+
+import com.yomii.librarydemos.PageUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -139,7 +143,6 @@ public class Movie implements Cover {
     }
 
 
-
     public static class Staff implements android.os.Parcelable {
 
         /**
@@ -191,6 +194,10 @@ public class Movie implements Cover {
 
         public void setId(String id) {
             this.id = id;
+        }
+
+        public String getAvatar() {
+            return getAvatars().getMedium();
         }
 
 
@@ -326,9 +333,9 @@ public class Movie implements Cover {
         return 0f;
     }
 
-    public String getTags(){
+    public String getTags() {
         List<String> genres = getGenres();
-        if (genres != null && genres.size() > 0){
+        if (genres != null && genres.size() > 0) {
             StringBuilder stringBuilder = new StringBuilder();
             int size = genres.size();
             for (int i = 0; i < size; i++) {
@@ -339,5 +346,9 @@ public class Movie implements Cover {
             return stringBuilder.toString();
         }
         return "";
+    }
+
+    public void showLargeCoverImage(View view) {
+        PageUtils.largeImageActivity(getCoverUrl(), (Activity) view.getContext(),view);
     }
 }

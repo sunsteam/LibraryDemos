@@ -9,6 +9,18 @@
         <variable
             name="movie"
             type="com.yomii.librarydemos.rxretrofit.bean.Movie"/>
+        <variable
+            name="castManager"
+            type="android.support.v7.widget.LinearLayoutManager"/>
+        <variable
+            name="directorManager"
+            type="android.support.v7.widget.LinearLayoutManager"/>
+        <variable
+            name="castAdapter"
+            type="android.support.v7.widget.RecyclerView.Adapter"/>
+        <variable
+            name="directorAdapter"
+            type="android.support.v7.widget.RecyclerView.Adapter"/>
     </data>
 
 
@@ -65,15 +77,17 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:contentDescription="@string/cover_image"
+            android:transitionName="@string/transition_cover"
             android:layout_marginTop="@dimen/dp_8"
-            app:layout_constraintBottom_toTopOf="@+id/guideline_v23"
+            android:onClick="@{movie.showLargeCoverImage}"
+            app:layout_constraintBottom_toTopOf="@id/guideline_v23"
             app:layout_constraintDimensionRatio="5:7"
-            app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
-            app:layout_constraintRight_toLeftOf="@+id/guideline_h35"
+            app:layout_constraintLeft_toLeftOf="@id/guideline_left"
+            app:layout_constraintRight_toLeftOf="@id/guideline_h35"
             app:layout_constraintTop_toTopOf="parent"
             android:src="@{movie.coverUrl}"
-            app:placeHolder="@{R.mipmap.ic_launcher}"
-            tools:src="@mipmap/ic_launcher" />
+            app:placeHolder="@{R.drawable.common_placeholder}"
+            tools:src="@drawable/common_placeholder" />
 
         <TextView
             android:id="@+id/caption"
@@ -84,7 +98,7 @@
             android:layout_marginTop="@dimen/dp_12"
             android:textColor="@color/black_333333"
             android:textSize="@dimen/sp_20"
-            app:layout_constraintLeft_toLeftOf="@+id/guideline_h35"
+            app:layout_constraintLeft_toLeftOf="@id/guideline_h35"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@{movie.title}"
             tools:text="标题" />
@@ -98,8 +112,8 @@
             android:layout_marginTop="@dimen/dp_4"
             android:textColor="@color/black_999999"
             android:textSize="@dimen/sp_12"
-            app:layout_constraintLeft_toLeftOf="@+id/guideline_h35"
-            app:layout_constraintTop_toBottomOf="@+id/caption"
+            app:layout_constraintLeft_toLeftOf="@id/guideline_h35"
+            app:layout_constraintTop_toBottomOf="@id/caption"
             android:text="@{movie.original_title}"
             tools:text="原标题" />
 
@@ -112,8 +126,8 @@
             android:layout_marginTop="@dimen/dp_4"
             android:textColor="@color/black_999999"
             android:textSize="@dimen/sp_12"
-            app:layout_constraintLeft_toLeftOf="@+id/guideline_h35"
-            app:layout_constraintTop_toBottomOf="@+id/original_caption"
+            app:layout_constraintLeft_toLeftOf="@id/guideline_h35"
+            app:layout_constraintTop_toBottomOf="@id/original_caption"
             android:text="@{movie.tags}"
             tools:text="标签 | 标签2" />
 
@@ -126,8 +140,8 @@
             android:layout_marginTop="@dimen/dp_4"
             android:textColor="@color/black_999999"
             android:textSize="@dimen/sp_12"
-            app:layout_constraintLeft_toLeftOf="@+id/guideline_h35"
-            app:layout_constraintTop_toBottomOf="@+id/tag"
+            app:layout_constraintLeft_toLeftOf="@id/guideline_h35"
+            app:layout_constraintTop_toBottomOf="@id/tag"
             android:text="@{movie.year}"
             tools:text="年份" />
 
@@ -140,8 +154,8 @@
             android:layout_marginStart="@dimen/dp_12"
             android:layout_marginTop="@dimen/dp_4"
             android:numStars="5"
-            app:layout_constraintLeft_toLeftOf="@+id/guideline_h35"
-            app:layout_constraintTop_toBottomOf="@+id/year"
+            app:layout_constraintLeft_toLeftOf="@id/guideline_h35"
+            app:layout_constraintTop_toBottomOf="@id/year"
             android:rating="@{movie.ratingValue * 5}"
             tools:rating="3.5" />
 
@@ -153,8 +167,8 @@
             android:layout_marginTop="@dimen/dp_4"
             android:textColor="@color/black_999999"
             android:textSize="@dimen/sp_12"
-            app:layout_constraintLeft_toRightOf="@+id/rating_bar"
-            app:layout_constraintTop_toBottomOf="@+id/year"
+            app:layout_constraintLeft_toRightOf="@id/rating_bar"
+            app:layout_constraintTop_toBottomOf="@id/year"
             android:text='@{"评分: " + movie.ratingAverage}'
             tools:text="评分: 7.5" />
 
@@ -176,7 +190,10 @@
             app:layout_constraintBottom_toTopOf="@id/guideline_v46"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView" />
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            app:adapter="@{castAdapter}"
+            app:layoutManager="@{castManager}"
+            />
 
         <TextView
             android:id="@+id/textView2"
@@ -196,7 +213,9 @@
             app:layout_constraintBottom_toTopOf="@id/guideline_v70"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView2" />
+            app:layout_constraintTop_toBottomOf="@id/textView2"
+            app:adapter="@{directorAdapter}"
+            app:layoutManager="@{directorManager}"/>
 
         <TextView
             android:id="@+id/textView3"

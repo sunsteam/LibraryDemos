@@ -8,7 +8,7 @@ buildscript {
                  minSdk    : 16,
                  targetSdk : 25,
                  ]
-        versions = [libSupport    : "25.2.0",
+        versions = [libSupport    : "25.3.1",
                     libButterKnife: "8.5.1",
                     libRxJava     : "2.0.1",
                     libRxBinding  : "2.0.0",

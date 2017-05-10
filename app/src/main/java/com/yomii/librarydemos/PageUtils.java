@@ -1,12 +1,15 @@
 package com.yomii.librarydemos;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 
+import com.yomii.librarydemos.databinding.MovieActivity;
 import com.yomii.librarydemos.rxretrofit.DoubanActivity;
 import com.yomii.librarydemos.rxretrofit.GithubActivity;
-import com.yomii.librarydemos.rxretrofit.MovieActivity;
 import com.yomii.librarydemos.rxretrofit.bean.Cover;
+import com.yomii.librarydemos.transition.LargeImageActivity;
 
 /**
  * 页面跳转辅助类
@@ -36,5 +39,9 @@ public class PageUtils {
         Intent intent = new Intent(context, MovieActivity.class);
         intent.putExtra("data", data);
         context.startActivity(intent);
+    }
+
+    public static void largeImageActivity(String imageUrl, Activity from, View imageView){
+        LargeImageActivity.shareImageToHere(imageUrl,from,imageView);
     }
 }

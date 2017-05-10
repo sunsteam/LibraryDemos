@@ -11,12 +11,13 @@
         android:layout_width="@dimen/dp_355"
         android:layout_height="@dimen/dp_355"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/image_placeholder"/>
+        android:src="@drawable/common_placeholder"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal|bottom"
+        android:text="@string/str_image_selector"
         android:onClick="openDrawer"/>
 
 </FrameLayout>

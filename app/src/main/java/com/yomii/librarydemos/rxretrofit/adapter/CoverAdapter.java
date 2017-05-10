@@ -26,7 +26,7 @@ public class CoverAdapter extends BaseRecyclerAdapter<Cover> {
 
     @Override
     public BaseRecyclerHolder<Cover> onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new CoverHolder(parent, R.layout.douban_recycler);
+        return new CoverHolder(parent, R.layout.douban_recycler_cover);
     }
 
     private class CoverHolder extends BaseRecyclerHolder<Cover> {

@@ -41,7 +41,11 @@
         <activity android:name=".rxretrofit.DoubanActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".rxretrofit.MovieActivity"
+        <activity android:name=".databinding.MovieActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity android:name=".transition.LargeImageActivity"
             android:screenOrientation="portrait">
         </activity>
 

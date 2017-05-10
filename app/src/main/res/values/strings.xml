@@ -12,8 +12,10 @@
     <string name="douban_movie">豆瓣电影</string>
     <string name="douban_book">豆瓣图书</string>
     <string name="cover_image">封面图片</string>
+    <string name="staff_image">演员头像</string>
     <string name="casts">演员</string>
     <string name="directors">导演</string>
     <string name="summary">简介</string>
     <string name="summary_content">此处应有一大波简介</string>
+    <string name="transition_cover">view_share_cover</string>
 </resources>
