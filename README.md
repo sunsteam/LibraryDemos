@@ -73,6 +73,8 @@
 
 - ### 用于转场和View动效的Transition框架 / transition
 
-  The Transitions Framework: https://developer.android.com/training/transitions/overview.html
-                             http://blog.csdn.net/sunsteam/article/details/71565999
+  The Transitions Framework: 
+  
+  https://developer.android.com/training/transitions/overview.html <br>
+  http://blog.csdn.net/sunsteam/article/details/71565999
   
