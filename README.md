@@ -44,6 +44,7 @@
 - ### rxAndroid 和 retrofit 结合 / rxretrofit
   
   rx分支较多，不贴了
+  
   retrofit: https://github.com/square/retrofit
   
   ```
@@ -76,5 +77,6 @@
   The Transitions Framework: 
   
   https://developer.android.com/training/transitions/overview.html <br>
+  
   http://blog.csdn.net/sunsteam/article/details/71565999
   
