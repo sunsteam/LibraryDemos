@@ -1,4 +1,4 @@
-package com.yomii.librarydemos;
+package com.yomii.librarydemos.databinding;
 
 import android.databinding.BindingAdapter;
 import android.widget.ImageView;

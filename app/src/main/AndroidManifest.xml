@@ -32,10 +32,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ImageFuncActivity"
+        <activity android:name=".imagepicker.ImageFuncActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".RxRetrofitActivity"
+        <activity android:name=".rxretrofit.RxRetrofitActivity"
             android:screenOrientation="portrait"/>
 
         <activity android:name=".rxretrofit.DoubanActivity"

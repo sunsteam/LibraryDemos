@@ -1,7 +1,9 @@
-package com.yomii.librarydemos;
+package com.yomii.librarydemos.rxretrofit;
 
 import android.view.View;
 
+import com.yomii.librarydemos.PageUtils;
+import com.yomii.librarydemos.R;
 import com.yomii.librarydemos.base.BaseActivity;
 
 /**

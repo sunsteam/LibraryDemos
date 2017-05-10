@@ -1,4 +1,4 @@
-package com.yomii.librarydemos;
+package com.yomii.librarydemos.imagepicker;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatDialog;
@@ -6,6 +6,8 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.yomii.librarydemos.R;
 
 /**
  * 获取图片对话框

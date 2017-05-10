@@ -6,8 +6,10 @@ import android.content.Intent;
 import android.view.View;
 
 import com.yomii.librarydemos.databinding.MovieActivity;
+import com.yomii.librarydemos.imagepicker.ImageFuncActivity;
 import com.yomii.librarydemos.rxretrofit.DoubanActivity;
 import com.yomii.librarydemos.rxretrofit.GithubActivity;
+import com.yomii.librarydemos.rxretrofit.RxRetrofitActivity;
 import com.yomii.librarydemos.rxretrofit.bean.Cover;
 import com.yomii.librarydemos.transition.LargeImageActivity;
 
