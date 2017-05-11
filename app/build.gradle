@@ -95,6 +95,8 @@ dependencies {
     compile "com.android.support:appcompat-v7:$rootProject.versions.libSupport"
     compile "com.android.support:recyclerview-v7:$rootProject.versions.libSupport"
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    //权限
+    compile 'pub.devrel:easypermissions:0.4.0'
     //网络
     compile "com.squareup.retrofit2:retrofit:$rootProject.versions.libRetrofit"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.versions.libRetrofit"
@@ -115,5 +117,9 @@ dependencies {
         exclude module: 'rxjava', group: 'io.reactivex'
         exclude module: 'rxandroid', group: 'io.reactivex'
     })
+    //二维码/条形码
+    compile 'com.google.zxing:core:3.2.1'
+    compile "cn.bingoogolapple:bga-qrcodecore:$rootProject.versions.libBGAQRCode@aar"
+    compile "cn.bingoogolapple:bga-zxing:$rootProject.versions.libBGAQRCode@aar"
 
 }
