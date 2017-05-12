@@ -5,9 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.yomii.librarydemos.databinding.MovieActivity;
 import com.yomii.librarydemos.imagepicker.ImageFuncActivity;
-import com.yomii.librarydemos.qrcode.ScanCodeActivity;
 import com.yomii.librarydemos.rxretrofit.DoubanActivity;
 import com.yomii.librarydemos.rxretrofit.GithubActivity;
 import com.yomii.librarydemos.rxretrofit.RxRetrofitActivity;
@@ -30,8 +30,8 @@ public class PageUtils {
         context.startActivity(new Intent(context, RxRetrofitActivity.class));
     }
 
-    public static void scanCodeActivity(Context context){
-        context.startActivity(new Intent(context, ScanCodeActivity.class));
+    public static void scanCodeActivity(Activity context){
+        context.startActivityForResult(new Intent(context, CaptureActivity.class),1);
     }
 
     public static void doubanActivity(Context context){

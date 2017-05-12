@@ -1,10 +1,15 @@
 package com.yomii.librarydemos;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Toast;
+
+import com.uuzuche.lib_zxing.activity.CodeUtils;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import java.util.List;
 
@@ -20,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ZXingLibrary.initDisplayOpinion(getApplicationContext());
         setContentView(R.layout.main_activity);
         ButterKnife.bind(this);
     }
@@ -66,6 +72,23 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
         if (!EasyPermissions.hasPermissions(this, perms)) {
             EasyPermissions.requestPermissions(this, "扫描二维码需要打开相机和闪光灯的权限",
                     REQUEST_CODE_QRCODE_PERMISSIONS, perms);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (null != data) {
+            Bundle bundle = data.getExtras();
+            if (bundle == null) {
+                return;
+            }
+            if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                String result = bundle.getString(CodeUtils.RESULT_STRING);
+                Toast.makeText(this, "解析结果:" + result, Toast.LENGTH_LONG).show();
+            } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                Toast.makeText(MainActivity.this, "解析二维码失败", Toast.LENGTH_LONG).show();
+            }
         }
     }
 }

@@ -84,13 +84,16 @@ android {
     }
 }
 
+repositories { flatDir { dirs 'libs' } }
+
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     //test
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     testCompile 'junit:junit:4.12'
+
     //support
     compile "com.android.support:appcompat-v7:$rootProject.versions.libSupport"
     compile "com.android.support:recyclerview-v7:$rootProject.versions.libSupport"
@@ -119,7 +122,5 @@ dependencies {
     })
     //二维码/条形码
     compile 'com.google.zxing:core:3.2.1'
-    compile "cn.bingoogolapple:bga-qrcodecore:$rootProject.versions.libBGAQRCode@aar"
-    compile "cn.bingoogolapple:bga-zxing:$rootProject.versions.libBGAQRCode@aar"
-
+    compile (name: 'lib-zxing-release', ext: 'aar')
 }
