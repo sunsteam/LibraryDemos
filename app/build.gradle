@@ -118,5 +118,9 @@ dependencies {
         exclude module: 'rxjava', group: 'io.reactivex'
         exclude module: 'rxandroid', group: 'io.reactivex'
     })
-
+    //权限
+    implementation 'pub.devrel:easypermissions:0.4.0'
+    //二维码/条形码
+    implementation 'com.google.zxing:core:3.2.1'
+    implementation (name: 'lib-zxing-release', ext: 'aar')
 }

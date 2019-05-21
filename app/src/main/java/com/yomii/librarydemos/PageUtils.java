@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.yomii.librarydemos.databinding.MovieActivity;
 import com.yomii.librarydemos.imagepicker.ImageFuncActivity;
 import com.yomii.librarydemos.rxretrofit.DoubanActivity;
@@ -27,6 +28,10 @@ public class PageUtils {
 
     public static void rxRetrofitActivity(Context context){
         context.startActivity(new Intent(context, RxRetrofitActivity.class));
+    }
+
+    public static void scanCodeActivity(Activity context){
+        context.startActivityForResult(new Intent(context, CaptureActivity.class),1);
     }
 
     public static void doubanActivity(Context context){
