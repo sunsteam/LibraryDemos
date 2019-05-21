@@ -16,7 +16,7 @@ import com.yomii.librarydemos.rxretrofit.bean.Movie;
 public class MovieActivity extends BaseActivity {
 
 
-    private MovieDetailActivityBinding binding;
+    private com.yomii.librarydemos.databinding.MovieDetailActivityBinding binding;
 
     @Override
     protected void onInitView() {

@@ -79,7 +79,7 @@
             android:contentDescription="@string/cover_image"
             android:transitionName="@string/transition_cover"
             android:layout_marginTop="@dimen/dp_8"
-            android:onClick="@{movie.showLargeCoverImage}"
+            android:onClick="@{movie::showLargeCoverImage}"
             app:layout_constraintBottom_toTopOf="@id/guideline_v23"
             app:layout_constraintDimensionRatio="5:7"
             app:layout_constraintLeft_toLeftOf="@id/guideline_left"

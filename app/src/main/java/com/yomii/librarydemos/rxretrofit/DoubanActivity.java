@@ -146,6 +146,7 @@ public class DoubanActivity extends BaseActivity {
                     bookIndex = value.getNextStart();
                     bookAdapter.addDataFromList(value.getSubjects());
                     break;
+                    default:
             }
         }
 
